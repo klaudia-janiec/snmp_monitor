@@ -4,6 +4,12 @@
 Setup SNMP agent on your computer. If you use Linux you can follow [this article](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-an-snmp-daemon-and-client-on-ubuntu-14-04).
 
 ## Setup application
+Install dependencies:
+
+```bash
+$ bundle install
+```
+
 Set environment variables:
 ```bash
 $ cp .env.example .env
