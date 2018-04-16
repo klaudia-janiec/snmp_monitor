@@ -1,0 +1,54 @@
+# -*- mode: ruby -*
+# vi: set ft=ruby :
+
+AGENTS_NUMBER = 1
+
+FIRSTHOST=1
+SUBNET="10.10.10."
+BROADCAST=SUBNET+"255" # it's the last address, not a gateway
+NETMASK="255.255.255.0"
+
+Vagrant.configure("2") do |config|
+  # config.vm.box = "alpine/alpine64" # this does not work with private networks due to lack of rth1 configuration entry in /etc/network/interfaces
+  config.vm.box = "koikos/alpine"
+  config.vm.box_version = "0.0.2"
+  config.vm.network "private_network", type: "dhcp", auto_config: false, virtualbox__intnet: "ask_network"   
+
+  config.vm.provider "virtualbox" do |vb|
+    # vb.gui = true
+    vb.linked_clone = true
+  end
+
+  ## upload necessary files
+  config.vm.provision "file", source: "configuration_snmpd", destination: "snmpd.conf" 
+  config.vm.provision "file", source: "configuration_monitor_env", destination: "env"
+
+  ## configuration for agent machine
+  (1..AGENTS_NUMBER).each do |i| 
+    config.vm.define "agent#{i}" do |agent|
+      agent.vm.network :forwarded_port, protocol: "udp", guest: 161, host: 2160+i, id: "SNMP service of agent#{i}",auto_correct: true 
+      agent.vm.provision "shell" do |shell|
+        ip=SUBNET+(FIRSTHOST+i).to_s
+        shell.path = "./configuration_networking.sh"
+        shell.args = "-i #{ip} -n #{NETMASK} -b #{BROADCAST} -h agent#{i}"
+      end
+      agent.vm.provision "shell", path: "./provision_agent.sh"
+    end 
+  end 
+
+  ## configuration for monitor machine
+  config.vm.define "monitor" do |monitor|
+    monitor.vm.network :forwarded_port, protocol: "tcp", guest: 9292, host: 8080, id: "SNMP web monitor", auto_correct: true
+    monitor.vm.network :forwarded_port, protocol: "udp", guest: 161,  host: 2160, id: "SNMP service of monitor", auto_correct: true 
+    monitor.vm.provision "shell" do |shell|
+      ip=SUBNET+FIRSTHOST.to_s
+      shell.path = "./configuration_networking.sh"
+      shell.args = "-i #{ip} -n #{NETMASK} -b #{BROADCAST} -h monitor"
+    end 
+    monitor.vm.provision "shell", path: "./provision_agent.sh"
+    monitor.vm.provision "shell", path: "./provision_monitor.sh", privileged: false
+    monitor.vm.provision "shell", path: "./run_monitor.sh", privileged: false, run: "always"
+  end
+
+end
+
