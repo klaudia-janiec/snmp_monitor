@@ -8,4 +8,8 @@ class BaseController < Sinatra::Base
 
   set :views, File.expand_path("../views", __dir__)
   set :public_folder, "public"
+
+  get "/" do
+    redirect "/agents/"
+  end
 end
