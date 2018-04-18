@@ -1,7 +1,62 @@
-$font-stack:    Helvetica, sans-serif;
+@import url('https://fonts.googleapis.com/css?family=Gugi|IBM+Plex+Serif');
+
 $primary-color: #333;
 
+html, body {
+  height: 100%;
+}
+
 body {
-  font: 100% $font-stack;
   color: $primary-color;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+.page-1 {
+  position: relative;
+
+  .middle {
+    font-family: 'IBM Plex Serif', serif;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    h1 {
+      font-size: 50px;
+      text-transform: uppercase;
+    }
+  }
+
+  &:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: url("/images/monitor.png");
+    background-repeat: no-repeat, repeat;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.2;
+  }
+}
+
+div[class*="page-"] {
+  height: 100%;
+
+  .container {
+    text-align: center;
+    font-family: 'IBM Plex Serif', serif;
+    padding-top: 30px;
+  }
+}
+
+.inactive {
+  display: none;
 }
