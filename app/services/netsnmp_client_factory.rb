@@ -3,13 +3,15 @@
 require "netsnmp"
 
 class NetsnmpClientFactory
-  def self.create_client
-    NETSNMP::Client.new(host: ENV.fetch("HOST"),
-                        port: ENV.fetch("PORT"),
-                        username: ENV.fetch("USERNAME"),
-                        auth_password: ENV.fetch("AUTH_PASSWORD"),
-                        auth_protocol: ENV.fetch("AUTH_PROTOCOL"),
-                        priv_password: ENV.fetch("PRIV_PASSWORD"),
-                        priv_protocol: ENV.fetch("PRIV_PROTOCOL"))
+  def self.create_client(agent_id)
+    agent = Agent.find(agent_id)
+
+    NETSNMP::Client.new(host: agent.host,
+                        port: agent.port,
+                        username: agent.username,
+                        auth_password: agent.auth_password,
+                        auth_protocol: agent.auth_protocol,
+                        priv_password: agent.priv_password,
+                        priv_protocol: agent.priv_protocol)
   end
 end

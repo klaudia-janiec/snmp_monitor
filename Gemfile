@@ -12,7 +12,13 @@ gem "sinatra"
 gem "sinatra-contrib"
 
 gem "haml"
-gem 'sass'
+gem "sass"
+
+gem "pg"
+gem "activerecord"
+gem "sinatra-activerecord"
+gem "attr_encrypted"
+gem "rake"
 
 group :development do
   gem "rubocop"
