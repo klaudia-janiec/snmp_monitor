@@ -60,6 +60,21 @@ div[class*="page-"] {
       padding-top: 30px;
       padding-bottom: 10px;
     }
+
+    #refresh {
+      padding-top: 30px;
+      padding-bottom: 20px;
+
+      img {
+        transition: all 0.3s ease-in-out 0s
+      }
+
+      img:hover {
+        cursor: pointer;
+        transform: rotate(360deg);
+        transition: all 0.3s ease-in-out 0s;
+      }
+    }
   }
 }
 
