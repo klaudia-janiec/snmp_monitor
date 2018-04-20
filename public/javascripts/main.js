@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-  var curPage = 1;
+  var curPage = 0;
   var numOfPages = $("[class^=page]").length;
   var animTime = 1000;
   var scrolling = false;
@@ -19,13 +19,13 @@ $(document).ready(function() {
   };
 
   function navigateUp() {
-    if (curPage === 1) return;
+    if (curPage === 0) return;
     curPage--;
     pagination();
   };
 
   function navigateDown() {
-    if (curPage === numOfPages) return;
+    if (curPage === numOfPages - 1) return;
     curPage++;
     pagination();
   };

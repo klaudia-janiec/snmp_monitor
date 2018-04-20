@@ -12,9 +12,10 @@ class AgentsController < BaseController
 
   namespace "/agents" do
     get "/" do
-      locals = SystemOverview.new.call
+      # TODO: After adding DB we should do there just: Agent.all.map { |agent| SystemOverview.new(agent).call }
+      systems_overview = [SystemOverview.new.call]
 
-      haml "agents/index".to_sym, locals: { **locals }
+      haml "agents/index".to_sym, locals: { systems_overview: systems_overview }
     end
   end
 end
