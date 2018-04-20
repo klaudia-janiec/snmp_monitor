@@ -27,6 +27,9 @@ Application is available on `9292` port by default.
 
 Go to agents path: `http://localhost:9292/agents/`. You should see information about your system.
 
+## OIDs description
+http://oidref.com/
+
 ## To do:
 1) Refactor.
 
