@@ -4,7 +4,7 @@ require_relative "netsnmp_client_factory"
 
 class SystemOverview
   OID_CODES = {
-      system_name: "1.3.6.1.2.1.1.5",
+      system_name: "1.3.6.1.2.1.1.5.0",
       system_information: "1.3.6.1.2.1.1.1.0",
       user_cpu_time: "1.3.6.1.4.1.2021.11.9.0",
       system_cpu_time: "1.3.6.1.4.1.2021.11.10.0",
