@@ -16,19 +16,19 @@
     .row
       .col
         %h4
-          = user_cpu_time
+          #{user_cpu_time} %
         %p
-          User CPU time [%]
+          User CPU time
       .col
         %h4
-          = system_cpu_time
+          #{system_cpu_time} %
         %p
-          System CPU time [%]
+          System CPU time
       .col
         %h4
-          = idle_cpu_time
+          #{idle_cpu_time} %
         %p
-          Idle CPU time [%]
+          Idle CPU time
 
     .row
       .col
@@ -37,34 +37,34 @@
     .row
       .col
         %h4
-          = total_ram
+          #{to_gb(total_ram)} GB
         %p
-          Total RAM [kB]
+          Total RAM
       .col
         %h4
-          = ram_used
+          #{to_gb(ram_used)} GB
         %p
-          RAM used [kB]
+          RAM used
       .col
         %h4
-          = ram_free
+          #{to_gb(ram_free)} GB
         %p
-          RAM free [kB]
+          RAM free
       .col
         %h4
-          = ram_shared
+          #{to_gb(ram_shared)} GB
         %p
-          RAM shared [kB]
+          RAM shared
       .col
         %h4
-          = ram_buffered
+          #{to_gb(ram_buffered)} GB
         %p
-          RAM buffered [kB]
+          RAM buffered
       .col
         %h4
-          = cached_memory
+          #{to_gb(cached_memory)} GB
         %p
-          Cached memory [kB]
+          Cached memory
 
     .row
       .col
@@ -73,16 +73,16 @@
     .row
       .col
         %h4
-          = disk_size
+          #{to_gb(disk_size)} GB
         %p
-          Total size [kB]
+          Total size
       .col
         %h4
-          = disk_available_space
+          #{to_gb(disk_available_space)} GB
         %p
-          Available space [kB]
+          Available space
       .col
         %h4
-          = disk_space_utilization
+          #{to_gb(disk_space_utilization)} GB
         %p
-          Used space [kB]
+          Used space
