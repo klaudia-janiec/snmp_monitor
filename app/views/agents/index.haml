@@ -8,8 +8,10 @@
     .container
       .row
         .col
-          %h2.system_information
-            = system_overview[:system_information]
+          %h2.system_name
+            = system_overview[:system_name]
+          %p#system_information
+            #{system_overview[:system_information]}%
       .row
         .col
           %h3
