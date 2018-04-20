@@ -1,6 +1,10 @@
 Readme on using vagrant
 =======================
 
+ATTENTION: vagranat is a virtual machine managing tool, but it's not a virtualization software by itself. 
+Another words, it require some virtualization software to be installed to host virtual machines. 
+In this project it isi the **VirtualBox** from Oracle **required** to run succesfully the prepared Vagrantfile.
+
 Installation
 ------------
 
