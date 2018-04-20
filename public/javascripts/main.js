@@ -12,6 +12,7 @@ $(document).ready(function() {
     $(pgPrefix + curPage).removeClass("inactive").addClass("active");
     $(pgPrefix + (curPage - 1)).addClass("inactive").removeClass("active");
     $(pgPrefix + (curPage + 1)).addClass("inactive").removeClass("active");
+    refreshCurrentAgentData();
 
     setTimeout(function() {
       scrolling = false;
@@ -47,4 +48,33 @@ $(document).ready(function() {
       navigateDown();
     }
   });
+
+  function refreshCurrentAgentData() {
+    if(curPage == 0) {
+      return;
+    }
+
+    $.ajax({
+      // This assumes that curPage is mapped to agent id in DB. This may not always happen.
+      // TODO: Add mapping between current page and agent id.
+      url: "/agents/" + curPage,
+      dataType: "json",
+      success: function(data){
+        for (var property in data) {
+          if (data.hasOwnProperty(property)) {
+            if (property === "system_information") {
+              $("#" + property).text(data[property])
+            } else if ($.inArray(property, ["user_cpu_time", "system_cpu_time", "idle_cpu_time"]) >= 0) {
+              $("#" + property).text(data[property] + " %")
+            } else {
+              $("#" + property).text(Math.round(data[property] * 100 / 1000000) / 100 + " GB")
+            }
+          }
+        }
+      }
+    });
+  }
+
+  $("#refresh").click(refreshCurrentAgentData);
+  setInterval(refreshCurrentAgentData, 5000);
 });

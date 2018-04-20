@@ -8,7 +8,7 @@
     .container
       .row
         .col
-          %h2
+          %h2.system_information
             = system_overview[:system_information]
       .row
         .col
@@ -16,17 +16,17 @@
             CPU
       .row
         .col
-          %h4
+          %h4#user_cpu_time
             #{system_overview[:user_cpu_time]} %
           %p
             User CPU time
         .col
-          %h4
+          %h4#system_cpu_time
             #{system_overview[:system_cpu_time]} %
           %p
             System CPU time
         .col
-          %h4
+          %h4#idle_cpu_time
             #{system_overview[:idle_cpu_time]} %
           %p
             Idle CPU time
@@ -37,32 +37,32 @@
             RAM
       .row
         .col
-          %h4
+          %h4#total_ram
             #{to_gb(system_overview[:total_ram])} GB
           %p
             Total RAM
         .col
-          %h4
-            #{to_gb(system_overview[:ram_used])} GB
+          %h4#ram_physical_free
+            #{to_gb(system_overview[:ram_physical_free])} GB
           %p
-            RAM used
+            Free physical memory
         .col
-          %h4
-            #{to_gb(system_overview[:ram_free])} GB
+          %h4#ram_free
+            #{to_gb(system_overview[:ram_total_free])} GB
           %p
-            RAM free
+            Total free RAM
         .col
-          %h4
+          %h4#ram_shared
             #{to_gb(system_overview[:ram_shared])} GB
           %p
             RAM shared
         .col
-          %h4
+          %h4#ram_buffered
             #{to_gb(system_overview[:ram_buffered])} GB
           %p
             RAM buffered
         .col
-          %h4
+          %h4#cached_memory
             #{to_gb(system_overview[:cached_memory])} GB
           %p
             Cached memory
@@ -73,17 +73,17 @@
             Disk
       .row
         .col
-          %h4
+          %h4#disk_size
             #{to_gb(system_overview[:disk_size])} GB
           %p
             Total size
         .col
-          %h4
+          %h4#disk_available_space
             #{to_gb(system_overview[:disk_available_space])} GB
           %p
             Available space
         .col
-          %h4
+          %h4#disk_space_utilization
             #{to_gb(system_overview[:disk_space_utilization])} GB
           %p
             Used space
