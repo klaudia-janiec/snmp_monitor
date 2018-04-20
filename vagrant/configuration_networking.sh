@@ -8,6 +8,7 @@ if (( $# != 8 )); then
     exit 1
 fi 
 
+
 # Parsing provided parameters
 while getopts ":i:n:b:h:" opt; do
   case $opt in
@@ -21,12 +22,14 @@ while getopts ":i:n:b:h:" opt; do
 done
 shift $((OPTIND-1))
 
+
 # Debug checkout
 echo "==> Checking if parameters are correct"
 echo "    ip:        $SET_IP"
 echo "    netmask:   $SET_NETMASK"
 echo "    broadcast: $SET_BROADCAST"
 echo "    hostname:  $SET_HOSTNAME"
+
 
 # Prepare 'interfaces' file
 INTERFACES_CONTENT="auto lo
@@ -42,12 +45,19 @@ iface eth0 inet static
 auto eth1
 iface eth1 inet dhcp"
 
+
 # Change network configuration and restart eth0
 echo "==> Changing network configuration"
-echo "$INTERFACES_CONTENT" > interfaces
 
-mv ./interfaces /etc/network/ -f
+echo '--> update hostname config'
+echo "$SET_HOSTNAME" > /etc/hostname
 hostname $SET_HOSTNAME
+
+echo '--> update interfaces config'
+echo "$INTERFACES_CONTENT" > interfaces
+mv ./interfaces /etc/network/ -f
+
+echo '--> restarting eth0'
 ifdown eth0
 ifup eth0
 echo "    Done."
