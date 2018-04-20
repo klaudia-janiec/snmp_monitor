@@ -9,3 +9,80 @@
       .col
         %h2
           = system_information
+    .row
+      .col
+        %h3
+          CPU
+    .row
+      .col
+        %h4
+          = user_cpu_time
+        %p
+          User CPU time [%]
+      .col
+        %h4
+          = system_cpu_time
+        %p
+          System CPU time [%]
+      .col
+        %h4
+          = idle_cpu_time
+        %p
+          Idle CPU time [%]
+
+    .row
+      .col
+        %h3
+          RAM
+    .row
+      .col
+        %h4
+          = total_ram
+        %p
+          Total RAM [kB]
+      .col
+        %h4
+          = ram_used
+        %p
+          RAM used [kB]
+      .col
+        %h4
+          = ram_free
+        %p
+          RAM free [kB]
+      .col
+        %h4
+          = ram_shared
+        %p
+          RAM shared [kB]
+      .col
+        %h4
+          = ram_buffered
+        %p
+          RAM buffered [kB]
+      .col
+        %h4
+          = cached_memory
+        %p
+          Cached memory [kB]
+
+    .row
+      .col
+        %h3
+          Disk
+    .row
+      .col
+        %h4
+          = disk_size
+        %p
+          Total size [kB]
+      .col
+        %h4
+          = disk_available_space
+        %p
+          Available space [kB]
+      .col
+        %h4
+          = disk_space_utilization
+        %p
+          Used space [kB]

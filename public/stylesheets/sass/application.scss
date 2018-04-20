@@ -54,6 +54,12 @@ div[class*="page-"] {
     text-align: center;
     font-family: 'IBM Plex Serif', serif;
     padding-top: 30px;
+
+    h3 {
+      text-align: left;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
   }
 }
 
