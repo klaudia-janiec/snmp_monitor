@@ -3,6 +3,7 @@
 require "sinatra/json"
 require_relative "base_controller"
 require_relative "../services/system_overview"
+require_relative "../models/agent"
 
 class AgentsController < BaseController
   helpers do
@@ -13,19 +14,14 @@ class AgentsController < BaseController
 
   namespace "/agents" do
     get "/" do
-      # TODO: After adding DB we should do there just: Agent.all.map { |agent| SystemOverview.new(agent).call }
-      systems_overview = [SystemOverview.new.call]
+      systems_overview = Agent.all.order(:id).pluck(:id).map { |agent_id| SystemOverview.new(agent_id).call }
 
-      haml "agents/index".to_sym, locals: { systems_overview: systems_overview }
+      respond_with "agents/index".to_sym, { systems_overview: systems_overview }
+      respond_with systems_overview
     end
 
     get "/:id" do
-      # TODO: After moving agents to DB we should do like:
-      # agent = Agent.find(params[:id])
-      # system_overview = SystemOverview.new(agent).call
-      system_overview = SystemOverview.new.call
-
-      json system_overview
+      json SystemOverview.new(params[:id]).call
     end
   end
 end

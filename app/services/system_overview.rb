@@ -19,14 +19,15 @@ class SystemOverview
     disk_space_utilization: "1.3.6.1.4.1.2021.9.1.8.1"
   }.freeze
 
-  attr_reader :netsnmp_client
+  attr_reader :netsnmp_client, :agent_id
 
-  def initialize
-    @netsnmp_client = NetsnmpClientFactory.create_client
+  def initialize(agent_id)
+    @agent_id = agent_id
+    @netsnmp_client = NetsnmpClientFactory.create_client(agent_id)
   end
 
   def call
-    OID_CODES.each_with_object({}) do |(key, value), hash|
+    OID_CODES.each_with_object({id: agent_id}) do |(key, value), hash|
       hash[key] = netsnmp_client.get(oid: value)
     end
   end

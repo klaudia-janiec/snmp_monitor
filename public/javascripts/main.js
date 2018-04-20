@@ -5,6 +5,23 @@ $(document).ready(function() {
   var animTime = 1000;
   var scrolling = false;
   var pgPrefix = ".page-";
+  var pageNumAgentIdMapper = mapPageNumToAgentIds();
+
+  function mapPageNumToAgentIds() {
+    var mapper = {};
+
+    $.ajax({
+      url: "/agents/",
+      dataType: "json",
+      success: function(data) {
+        for (var i in data["systems_overview"]) {
+          mapper[parseInt(i) + 1] = data["systems_overview"][i]["id"]
+        }
+      }
+    });
+
+    return mapper;
+  }
 
   function pagination() {
     scrolling = true;
@@ -55,9 +72,7 @@ $(document).ready(function() {
     }
 
     $.ajax({
-      // This assumes that curPage is mapped to agent id in DB. This may not always happen.
-      // TODO: Add mapping between current page and agent id.
-      url: "/agents/" + curPage,
+      url: "/agents/" + pageNumAgentIdMapper[curPage],
       dataType: "json",
       success: function(data){
         for (var property in data) {
