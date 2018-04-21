@@ -3,8 +3,8 @@
 require "netsnmp"
 
 class NetsnmpClientFactory
-  def self.create_client
-    NETSNMP::Client.new(host: ENV.fetch("HOST"),
+  def self.create_client(ip)
+    NETSNMP::Client.new(host: ip,
                         port: ENV.fetch("PORT"),
                         username: ENV.fetch("USERNAME"),
                         auth_password: ENV.fetch("AUTH_PASSWORD"),

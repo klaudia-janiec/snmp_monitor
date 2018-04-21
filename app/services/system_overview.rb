@@ -22,8 +22,8 @@ class SystemOverview
 
   attr_reader :netsnmp_client
 
-  def initialize
-    @netsnmp_client = NetsnmpClientFactory.create_client
+  def initialize(ip)
+    @netsnmp_client = NetsnmpClientFactory.create_client(ip)
   end
 
   def call
