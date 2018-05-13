@@ -62,12 +62,12 @@ $(document).ready(function() {
       success: function(data){
         for (var property in data) {
           if (data.hasOwnProperty(property)) {
-            if (property === "system_information") {
-              $("#" + property).text(data[property])
+            if (property === "system_information" || property === "system_name") {
+              $("#" + property + "_" + curPage).text(data[property])
             } else if ($.inArray(property, ["user_cpu_time", "system_cpu_time", "idle_cpu_time"]) >= 0) {
-              $("#" + property).text(data[property] + " %")
+              $("#" + property + "_" + curPage).text(data[property] + " %")
             } else {
-              $("#" + property).text(Math.round(data[property] * 100 / 1000000) / 100 + " GB")
+              $("#" + property + "_" + curPage).text(Math.round(data[property] * 100 / 1000000) / 100 + " GB")
             }
           }
         }

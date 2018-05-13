@@ -8,9 +8,9 @@
     .container
       .row
         .col
-          %h2.system_name
+          %h2{ id: "system_name_#{ index + 1 }" }
             = system_overview[:system_name]
-          %p#system_information
+          %p{ id: "system_information_#{ index + 1 }" }
             #{system_overview[:system_information]}%
       .row
         .col
@@ -18,17 +18,17 @@
             CPU
       .row
         .col
-          %h4#user_cpu_time
+          %h4{ id: "user_cpu_time_#{ index + 1 }" }
             #{system_overview[:user_cpu_time]} %
           %p
             User CPU time
         .col
-          %h4#system_cpu_time
+          %h4{ id: "system_cpu_time_#{ index + 1 }" }
             #{system_overview[:system_cpu_time]} %
           %p
             System CPU time
         .col
-          %h4#idle_cpu_time
+          %h4{ id: "idle_cpu_time_#{ index + 1 }" }
             #{system_overview[:idle_cpu_time]} %
           %p
             Idle CPU time
@@ -39,32 +39,32 @@
             RAM
       .row
         .col
-          %h4#total_ram
+          %h4{ id: "total_ram_#{ index + 1 }" }
             #{to_gb(system_overview[:total_ram])} GB
           %p
             Total RAM
         .col
-          %h4#ram_physical_free
+          %h4{ id: "ram_physical_free_#{ index + 1 }" }
             #{to_gb(system_overview[:ram_physical_free])} GB
           %p
             Free physical memory
         .col
-          %h4#ram_free
+          %h4{ id: "ram_free_#{ index + 1 }" }
             #{to_gb(system_overview[:ram_total_free])} GB
           %p
             Total free RAM
         .col
-          %h4#ram_shared
+          %h4{ id: "ram_shared_#{ index + 1 }" }
             #{to_gb(system_overview[:ram_shared])} GB
           %p
             RAM shared
         .col
-          %h4#ram_buffered
+          %h4{ id: "ram_buffered_#{ index + 1 }" }
             #{to_gb(system_overview[:ram_buffered])} GB
           %p
             RAM buffered
         .col
-          %h4#cached_memory
+          %h4{ id: "cached_memory_#{ index + 1 }" }
             #{to_gb(system_overview[:cached_memory])} GB
           %p
             Cached memory
@@ -75,17 +75,17 @@
             Disk
       .row
         .col
-          %h4#disk_size
+          %h4{ id: "disk_size_#{ index + 1 }" }
             #{to_gb(system_overview[:disk_size])} GB
           %p
             Total size
         .col
-          %h4#disk_available_space
+          %h4{ id: "disk_available_space_#{ index + 1 }" }
             #{to_gb(system_overview[:disk_available_space])} GB
           %p
             Available space
         .col
-          %h4#disk_space_utilization
+          %h4{ id: "disk_space_utilization_#{ index + 1 }" }
             #{to_gb(system_overview[:disk_space_utilization])} GB
           %p
             Used space
