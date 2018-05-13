@@ -1,5 +1,8 @@
 # README
 
+## Stress tests
+CPU stress test: `dd if=/dev/zero of=/dev/null`
+
 ## SNMP Agents
 Setup SNMP agent on your computer. If you use Linux you can follow [this article](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-an-snmp-daemon-and-client-on-ubuntu-14-04).
 
