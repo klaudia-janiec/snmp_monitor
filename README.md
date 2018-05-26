@@ -1,12 +1,41 @@
 # README
+The project is setup in the way that snmp monitor application pulls data about cpu and memory usage form some agents (by hardcoded ip).
+
+The project has configured virtual machines - to run the demonstration you need:  
+- install VirtualBox  
+- install vagrant  
+- navigate to `./vagrant` and issue command `vagrant up` - please note, that it will take few minutes, as provisioning of one of the machines requires compiling the ruby package (there was no binaries available). For more  information abot vagrant usage in project please consult `./vagrant/Readme.md`.
+- on host machine open [localhost:8080](localhost:8080) in the browser  
+
+Known issue:
+For some reason the javascript code is not served if the application runs in daemon mode. The workaround is:  
+- ssh into monitor machine:  
+```
+host $ cd ./vagrant
+host $ vagrant ssh monitor
+```
+after connecting to monitor machine you need to kill daemon and manually start monitoring web service:
+```
+monitor $ ps aux
+PID   USER     TIME   COMMAND
+ 2028 vagrant    0:00 {bundle} /home/vagrant/.rbenv/versions/2.5.0/bin/rackup -o 0.0.0.0 -D
+monitor $ kill 2028
+monitor $ cd snmp_monitor
+monitor $ bundle exec rackup -o 0.0.0.0
+```
 
 ## Stress tests
-CPU stress test: `dd if=/dev/zero of=/dev/null`
+To observe some values in the monitor application, you may want to start some resource-consuming job on one of machines, e.g.:
+```
+$ dd if=/dev/zero of=/dev/null
+```
 
-## SNMP Agents
+## Other info
+
+### How to setup SNMP agents in general
 Setup SNMP agent on your computer. If you use Linux you can follow [this article](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-an-snmp-daemon-and-client-on-ubuntu-14-04).
 
-## Setup application
+### How to setup monitor web application manually
 Install dependencies:
 
 ```bash
@@ -30,19 +59,6 @@ Application is available on `9292` port by default.
 
 Go to agents path: `http://localhost:9292/agents/`. You should see information about your system.
 
-## OIDs description
+### OIDs description
 http://oidref.com/
 
-## To do:
-1) Refactor.
-
-2) Add other information about system (CPU, RAM, disk
-space, disk utilization).
-
-3) Add pooling and web sockets to update information every 10(?) seconds.
-
-4) Replace `netsnmp` gem with our implementation.
-
-5) Add possibility to add more agents (keep agent information in database instead of environment variables, add `/agents/new` page to allow registration of new agent).
-
-6) Deploy app to Heroku(?). If we want do that we probably should add authentication.
